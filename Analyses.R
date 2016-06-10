@@ -1,12 +1,12 @@
-library(ggbiplot)
-library(grid)
-library(gridExtra)
-library(reshape2)
-library(MuMIn)
-library(arm)
-library(broom)
-library(popbio)
+# library(ggbiplot)
+# library(grid)
+# library(gridExtra)
+# library(reshape2)
+# library(MuMIn)
+# library(arm)
+# library(popbio)
 
+library(broom)
 library(lme4)
 library(ggplot2)
 library(dplyr)
@@ -128,9 +128,17 @@ reported.table.sdlgs
 
 write.table(reported.table.sdlgs, file = "Sdlgs_GLMM.csv", , sep = ",", na = "NA", row.names = TRUE)
 
+# Overall survival %
+survival_summary1<-table(seedlings$fate)
+survival_summary1.prop<-prop.table(as.matrix(survival_summary1))
+survival_summary1.prop #Proportions in each category
+
+# Surv % by trt
 survival_summary2<-table(seedlings$fate, seedlings$trt)
 survival_summary2.prop<-prop.table(as.matrix(survival_summary2))
 survival_summary2.prop #Proportions in each category
+
+# Surv % by species
 survival_summary3<-table(seedlings$fate, seedlings$spp)
 survival_summary3.prop<-prop.table(as.matrix(survival_summary3))
 survival_summary3.prop #Proportions in each category
