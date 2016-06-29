@@ -145,3 +145,33 @@ survival_summary3.prop #Proportions in each category
 
 
 
+
+
+#################################################################################
+# GLMM SEEDS
+# Otimo Exemplo: http://www.simonqueenborough.info/R/specialist/mixed-models.html
+#################################################################################
+
+
+
+# Some summary tables
+# How many Survived? 
+
+# This is "per tray"
+
+seeds["seeds_remaining"] <- NA
+seeds$seeds_remaining<-seeds$seeds_initial-seeds$seeds_removed
+seeds["seeds_prop_remaining"] <- NA
+seeds$seeds_prop_remaining<-(seeds$seeds_remaining/seeds$seeds_initial)
+summary(seeds)
+
+# For analyses, do the proportion, no. remaining per nest in each treatment (pool all trays for a nest) 
+
+seeds_removed_summary<-table(seeds$seeds_prop_remaining)
+
+
+# How many Survived by Species? 
+survival_summary<-table(seedlings$fate, seedlings$trt)
+survival_summary
+# Now the GLMMs
+options(na.action = "na.fail") #for calc of QAIC see page 42: https://cran.r-project.org/web/packages/MuMIn/MuMIn.pdf
